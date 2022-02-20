@@ -40,7 +40,7 @@ const updateToDoService = async (req) => {
         }
     });
     return updatedToDo;
-}
+};
 
 exports.getAlltodoService = getAlltodoService;
 exports.postToDoService = postToDoService;
