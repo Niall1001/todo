@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import instance from "../../utils/axios";
-
+import TodoCard from "./components/TodoCard";
 const Todo = () => {
 const [input, setInput] = useState("");
 const [toDos, setToDos] = useState([]);
@@ -11,9 +11,9 @@ getData();
 
 const getData = async () => {
 try {
-const todoRes = (await instance.get(`/todo`)).data;
+const todoRes = (await instance.get(`/todo`)).data.todos;
 console.log(todoRes);
-setToDos(todoRes[0]);
+setToDos(todoRes);
 } catch (error) {
 console.log(error);
 }
@@ -23,7 +23,14 @@ return (
 <div className="todos-container">
 {toDos.length > 0 ? (
 <div >
-<div>To dos page</div>
+    {
+    toDos.map((todo) => {
+        <TodoCard
+        id={todo.id}
+        description={todo.description}
+        completed={todo.completed} />
+    })
+    }
 </div>
 ) : (
 <div>Loading</div>
