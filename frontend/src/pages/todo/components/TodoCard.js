@@ -9,8 +9,8 @@ const TodoCard = ({id, description, completed}) => {
             marginBottom: "5px",
         }}>
             <div>id={id}</div>
-            <div>id={description}</div>
-            <div>id={completed}</div>
+            <div>description={description}</div>
+            <div>completed={completed}</div>
         </div>
     )
 }
