@@ -1,49 +1,49 @@
-const prisma = require("../utils/prisma");
+const prisma = require('../utils/prisma');
 
 const getAlltodoService = async () => {
-    return await prisma.todo.findMany();
+	return await prisma.todo.findMany();
 };
 
 const postToDoService = async (req) => {
-    const {description, completed} = req.body;
-    console.log(description)
-    console.log(completed)
-    console.log(typeof description)
-    console.log(typeof completed)
-    const newToDo = await prisma.todo.create({
-        data:{
-            description: description,
-            completed: completed,
-        },
-    });
-    return newToDo;
+	const { description, completed } = req.body;
+	console.log(description);
+	console.log(completed);
+	console.log(typeof description);
+	console.log(typeof completed);
+	const newToDo = await prisma.todo.create({
+		data: {
+			description: description,
+			completed: completed
+		}
+	});
+	return newToDo;
 };
 
 const deleteToDoService = async (id) => {
-    try {
-        await prisma.todo.delete({
-            where: {
-                id: parseInt(id),
-            },
-        });
-    } catch (e) {
-        console.log(e);
-    }
+	try {
+		await prisma.todo.delete({
+			where: {
+				id: parseInt(id)
+			}
+		});
+	} catch (e) {
+		console.log(e);
+	}
 };
 
 const updateToDoService = async (req) => {
-    const {description, completed} = req.body;
-    const updatedId = parseInt(req.params.id);
-    const updatedToDo = await prisma.todo.update({
-        where: {
-            id: updatedId,
-        },
-        data: {
-            description: description,
-            completed: completed,
-        }
-    });
-    return updatedToDo;
+	const { description, completed } = req.body;
+	const updatedId = parseInt(req.params.id);
+	const updatedToDo = await prisma.todo.update({
+		where: {
+			id: updatedId
+		},
+		data: {
+			description: description,
+			completed: completed
+		}
+	});
+	return updatedToDo;
 };
 
 exports.getAlltodoService = getAlltodoService;
