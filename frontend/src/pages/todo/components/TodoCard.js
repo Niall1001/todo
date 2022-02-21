@@ -52,7 +52,7 @@ const TodoCard = ({ id, description, completed }) => {
 		instance
 			.put(`/todo/${id}`, {
 				description: description,
-				completed: true
+				completed: completedStatus
 			})
 			.then(
 				(response) => {
@@ -76,7 +76,7 @@ const TodoCard = ({ id, description, completed }) => {
 		instance
 			.put(`/todo/${id}`, {
 				description: description,
-				completed: false
+				completed: completedStatus
 			})
 			.then(
 				(response) => {
@@ -129,21 +129,31 @@ const TodoCard = ({ id, description, completed }) => {
 					</form>
 				</div>
 			) : (
-				<div class='post-it'>
-					<h1>id={id}</h1>
-					<li>description={description}</li>
-					<li>completed={completedStatus}</li>
+				<div>
+				{completedStatus ? (
+					<div class='post-it-complete'>
+						<h1>{id}</h1>
+						<li>{description}</li>
+						<li>{completed.toString()}</li>
+					</div>
+				) : (
+					<div class='post-it-uncomplete'>
+						<h1>{id}</h1>
+						<li>{description}</li>
+						<li>{completed.toString()}</li>
+					</div>
+				)}
 				</div>
 			)}
 			{completedStatus ? (
 				<div className="todo-card-container">
 					<button className="button-52" onClick={handleEditCLick}>Edit To-Do: {id}</button>
-					<button className="button-52" onClick={handleCompletedClick}>Complete me</button>
+					<button className="button-52" onClick={handleUnCompletedClick}>Un-complete me</button>
 				</div>
 			) : (
 				<div className="todo-card-container">
 					<button className="button-52" onClick={handleEditCLick}>Edit To-Do: {id}</button>
-					<button className="button-52" onClick={handleUnCompletedClick}>Un-complete me</button>
+					<button className="button-52" onClick={handleCompletedClick}>Complete me</button>
 				</div>
 			)}
 		</div>

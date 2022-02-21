@@ -99,6 +99,46 @@ body {
   color:#130d6b;
 }
 
+.post-it-uncomplete {
+  width:250px;
+ height:240px;
+ position:relative;
+ background:#f44336;
+ overflow:hidden;
+ margin:30px auto;
+ padding:20px;
+ border-radius:0 0 0 30px/45px;
+ box-shadow:
+   inset 0 -40px 40px rgba(0,0,0,0.2),
+   inset 0 25px 10px rgba(0,0,0,0.2),
+   0 5px 6px 5px rgba(0,0,0,0.2);
+ font-family: 'Reenie Beanie', cursive;
+ line-height:1.7em;
+ font-size:19px;
+ flex-wrap: wrap;
+ color:#130d6b;
+}
+
+.post-it-complete {
+  width:250px;
+ height:240px;
+ position:relative;
+ background:#8fce00;
+ overflow:hidden;
+ margin:30px auto;
+ padding:20px;
+ border-radius:0 0 0 30px/45px;
+ box-shadow:
+   inset 0 -40px 40px rgba(0,0,0,0.2),
+   inset 0 25px 10px rgba(0,0,0,0.2),
+   0 5px 6px 5px rgba(0,0,0,0.2);
+ font-family: 'Reenie Beanie', cursive;
+ line-height:1.7em;
+ font-size:19px;
+ flex-wrap: wrap;
+ color:#130d6b;
+}
+
 .post-it li {
  	cursor:pointer; 
 }

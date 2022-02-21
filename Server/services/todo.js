@@ -36,7 +36,7 @@ const updateToDoService = async (req) => {
 		},
 		data: {
 			description: description,
-			completed: completed
+			completed: Boolean(completed)
 		}
 	});
 	return updatedToDo;
