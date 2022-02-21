@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import instance from '../../../utils/axios';
 import { useState } from 'react';
 import { Button, TextField } from '@mui/material';
-
 const TodoCard = ({ id, description, completed }) => {
 	const [ descriptionInput, setDescriptionInput ] = useState('');
 	const [ editMode, setEditMode ] = useState(false);
+	const [ completedStatus, setCompletedStatus] = useState(completed);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -33,10 +33,59 @@ const TodoCard = ({ id, description, completed }) => {
 
 	useEffect(() => {
 		setDescriptionInput(description);
-	}, []);
+	}, [description]);
 
 	const handleEditCLick = () => {
 		setEditMode(true);
+	};
+
+	const handleCompletedClick = async () => {
+		setCompletedStatus(true);
+
+		const errors = [];
+
+		if (completed === '') {
+			errors.push('Completed must be either true or false');
+		}
+		console.log(completedStatus);
+		
+		instance
+			.put(`/todo/${id}`, {
+				description: description,
+				completed: true
+			})
+			.then(
+				(response) => {
+					alert(`Completed status set to true with ID: ${id}`);
+				},
+				(error) => {
+					alert(error.message);
+				}
+			);
+	};
+
+	const handleUnCompletedClick = async () => {
+		setCompletedStatus(false);
+
+		const errors = [];
+
+		if (completed === '') {
+			errors.push('Completed must be either true or false');
+		}
+		console.log(completedStatus);
+		instance
+			.put(`/todo/${id}`, {
+				description: description,
+				completed: false
+			})
+			.then(
+				(response) => {
+					alert(`Completed status set to false with ID: ${id}`);
+				},
+				(error) => {
+					alert(error.message);
+				}
+			);
 	};
 
 	const handleCloseCLick = () => {
@@ -57,7 +106,7 @@ const TodoCard = ({ id, description, completed }) => {
 			}}
 		>
 			{editMode ? (
-				<div>
+				<div class='post-it'>
 					<form onSubmit={handleSubmit}>
 						<TextField
 							id="filled-basic"
@@ -66,10 +115,11 @@ const TodoCard = ({ id, description, completed }) => {
 							value={descriptionInput}
 							style={{ width: '100%' }}
 						/>
-						<Button type="submit" variant="contained" style={{ marginTop: '15px' }}>
+						<Button className="button-52" type="submit" variant="contained" style={{ marginTop: '15px' }}>
 							Save Description Edit
 						</Button>
 						<Button
+							className="button-52"
 							onClick={handleCloseCLick}
 							variant="contained"
 							style={{ marginTop: '15px', marginLeft: '15px' }}
@@ -79,13 +129,23 @@ const TodoCard = ({ id, description, completed }) => {
 					</form>
 				</div>
 			) : (
-				<div>
-					<div>id={id}</div>
-					<div>description={description}</div>
-					<div>completed={completed}</div>
+				<div class='post-it'>
+					<h1>id={id}</h1>
+					<li>description={description}</li>
+					<li>completed={completedStatus}</li>
 				</div>
 			)}
-			<button onClick={handleEditCLick}>Edit me</button>
+			{completedStatus ? (
+				<div className="todo-card-container">
+					<button className="button-52" onClick={handleEditCLick}>Edit To-Do: {id}</button>
+					<button className="button-52" onClick={handleCompletedClick}>Complete me</button>
+				</div>
+			) : (
+				<div className="todo-card-container">
+					<button className="button-52" onClick={handleEditCLick}>Edit To-Do: {id}</button>
+					<button className="button-52" onClick={handleUnCompletedClick}>Un-complete me</button>
+				</div>
+			)}
 		</div>
 	);
 };

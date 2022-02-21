@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import instance from '../../utils/axios';
 import TodoCard from './components/TodoCard';
 import { Button, TextField } from '@mui/material';
+import './index.css';
 const Todo = () => {
 	const [ input, setInput ] = useState('');
 	const [ toDos, setToDos ] = useState([]);
@@ -58,10 +59,20 @@ const Todo = () => {
 		<div className="todos-container">
 			{toDos.length > 0 ? (
 				<div>
+				<div class="animated-title" style={{marginTop:-100}}>
+					<div class="text-top">
+						<div>
+						<span>To Do</span>
+						<span>Application</span>
+						</div>
+					</div>
+					<div class="text-bottom">
+						<div>Life made easier</div>
+					</div>
+					</div>
 					<form onSubmit={handleSubmit}>
-						<div>Add description</div>
 						<div style={{ width: '100%' }}>
-							<p>Description</p>
+							<div class='post-it' style={{marginTop:500}}>
 							<TextField
 								id="filled-basic"
 								variant="standard"
@@ -69,10 +80,13 @@ const Todo = () => {
 								value={input}
 								style={{ width: '100%' }}
 							/>
+							</div>
 						</div>
-						<Button type="submit" variant="contained" style={{ marginTop: '15px' }}>
+						<div className="todo-card-container">
+						<Button class="button-52" type="submit">
 							Save To do
 						</Button>
+						</div>
 					</form>
 
 					{toDos.map((todo) => {

@@ -6,10 +6,6 @@ const getAlltodoService = async () => {
 
 const postToDoService = async (req) => {
 	const { description, completed } = req.body;
-	console.log(description);
-	console.log(completed);
-	console.log(typeof description);
-	console.log(typeof completed);
 	const newToDo = await prisma.todo.create({
 		data: {
 			description: description,
