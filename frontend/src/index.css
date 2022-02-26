@@ -23,7 +23,6 @@ code {
   display: flex;
   justify-content: center;
   flex-flow: center;
-  flex-wrap: wrap;
 }
 
 .button-52 {
@@ -103,7 +102,7 @@ body {
   width:250px;
  height:240px;
  position:relative;
- background:#f44336;
+ background:#FF7F7F;
  overflow:hidden;
  margin:30px auto;
  padding:20px;

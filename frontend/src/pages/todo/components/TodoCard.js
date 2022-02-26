@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import instance from '../../../utils/axios';
 import { useState } from 'react';
 import { Button, TextField } from '@mui/material';
+
 const TodoCard = ({ id, description, completed }) => {
 	const [ descriptionInput, setDescriptionInput ] = useState('');
 	const [ editMode, setEditMode ] = useState(false);
@@ -52,7 +53,7 @@ const TodoCard = ({ id, description, completed }) => {
 		instance
 			.put(`/todo/${id}`, {
 				description: description,
-				completed: completedStatus
+				completed: true
 			})
 			.then(
 				(response) => {
@@ -76,7 +77,7 @@ const TodoCard = ({ id, description, completed }) => {
 		instance
 			.put(`/todo/${id}`, {
 				description: description,
-				completed: completedStatus
+				completed: false
 			})
 			.then(
 				(response) => {
@@ -115,17 +116,19 @@ const TodoCard = ({ id, description, completed }) => {
 							value={descriptionInput}
 							style={{ width: '100%' }}
 						/>
-						<Button className="button-52" type="submit" variant="contained" style={{ marginTop: '15px' }}>
-							Save Description Edit
+						<div class="todo-card-container">
+						<Button class="button-52" type="submit" variant="contained" style={{ marginTop: '15px' }}>
+							Save
 						</Button>
 						<Button
-							className="button-52"
+							class="button-52"
 							onClick={handleCloseCLick}
 							variant="contained"
 							style={{ marginTop: '15px', marginLeft: '15px' }}
 						>
-							Close edit todo card
+							Close
 						</Button>
+						</div>
 					</form>
 				</div>
 			) : (
@@ -148,12 +151,12 @@ const TodoCard = ({ id, description, completed }) => {
 			{completedStatus ? (
 				<div className="todo-card-container">
 					<button className="button-52" onClick={handleEditCLick}>Edit To-Do: {id}</button>
-					<button className="button-52" onClick={handleUnCompletedClick}>Un-complete me</button>
+					<button className="button-52" onClick={handleUnCompletedClick}>Uncompleted</button>
 				</div>
 			) : (
 				<div className="todo-card-container">
 					<button className="button-52" onClick={handleEditCLick}>Edit To-Do: {id}</button>
-					<button className="button-52" onClick={handleCompletedClick}>Complete me</button>
+					<button className="button-52" onClick={handleCompletedClick}>Completed</button>
 				</div>
 			)}
 		</div>
