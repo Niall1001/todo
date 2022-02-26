@@ -3,5 +3,5 @@ CREATE TABLE IF NOT EXISTS public.ToDo(
             primary key,
     Description     VARCHAR(255),
     Completed       BOOLEAN NOT NULL
-); 
+);
 
