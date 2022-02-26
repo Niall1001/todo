@@ -13,13 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: download flyway
-        FLYWAY_VERSION=7.3.1
-
-        run: curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/$%7BFLYWAY_VERSION%7D/flyway-commandline-$%7BFLYWAY_VERSION%7D.tar.gz -o flyway-commandline-${FLYWAY_VERSION}.tar.gz \
-        && tar -xzf flyway-commandline-${FLYWAY_VERSION}.tar.gz --strip-components=1 \
-        && rm flyway-commandline-${FLYWAY_VERSION}.tar.gz
+        run: wget https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/7.8.2/flyway-commandline-7.8.2-linux-x64.tar.gz
       - name: extract and link flyway
         run: tar -xvf flyway-commandline-7.8.2-linux-x64.tar.gz && sudo ln -s pwd/flyway-7.8.2/flyway /usr/local/bin
       - name: migrate master
         if: github.ref == 'refs/heads/master'
-        run: flyway -X -url='${{ secrets.DEV_DB_URL }}' -user=${{ secrets.DEV_DB_USER }} -password=${{ secrets.DEV_DB_PASSWORD }} -locations=filesystem:./Migrations -outOfOrder=true -baselineOnMigrate=true migrate
+        run: ./flyway -X -url='${{ secrets.DEV_DB_URL }}' -user=${{ secrets.DEV_DB_USER }} -password=${{ secrets.DEV_DB_PASSWORD }} -locations=filesystem:./Migrations -outOfOrder=true -baselineOnMigrate=true migrate
