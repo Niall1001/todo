@@ -4,4 +4,3 @@ CREATE TABLE IF NOT EXISTS public.ToDo(
     Description     VARCHAR(255),
     Completed       BOOLEAN NOT NULL
 );
-
